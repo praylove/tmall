@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>天猫tmall.com--理想生活上天猫</title>
+		<script src="js/jquery-3.2.1.min.js"></script>
+		<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
+		<script src="js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="css/global.css" type="text/css" />
+		<link rel="stylesheet" href="css/index.css" type="text/css" />
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$(".selectAll").click(function() {
+					$(".selectAll").css("display", "none");
+					$(".unselectAll").css("display", "inline-block");
+					$(".select").css("display", "none");
+					$(".unselect").css("display", "inline-block");
+					if(countSelected() > 0) {
+						$(".m-settle-btn").addClass("s-abled").removeAttr("disabled");
+					} else {
+						$(".m-settle-btn").removeClass("s-abled").attr("disabled", true);
+					}
+				})
+				$(".unselectAll").click(function() {
+					$(".selectAll").css("display", "inline-block");;
+					$(".unselectAll").css("display", "none");
+					$(".select").css("display", "inline-block");
+					$(".unselect").css("display", "none");
+					if(countSelected() > 0) {
+						$(".m-settle-btn").addClass("s-abled").removeAttr("disabled");
+					} else {
+						$(".m-settle-btn").removeClass("s-abled").attr("disabled", true);
+					}
+				})
+				$(".g-check").click(function() {
+					$(this).children().toggle();
+					var lenOfAll = $(".g-check").length;
+					var len = countSelected();
+					if(len == lenOfAll) {
+						$(".selectAll").css("display", "none");
+						$(".unselectAll").css("display", "inline-block");
+					} else {
+						$(".selectAll").css("display", "inline-block");;
+						$(".unselectAll").css("display", "none");
+					}
+					if(len > 0) {
+						$(".m-settle-btn").addClass("s-abled").removeAttr("disabled");
+					} else {
+						$(".m-settle-btn").removeClass("s-abled").attr("disabled", true);
+					}
+				})
+				$(".down").click(function() {
+					var v = $(this).parent().find(".countValue");
+					var vnum = parseInt(v.val()) - 1;
+					if(vnum == 0)
+						return;
+					v.val(vnum + "");
+					countSelected()
+				})
+				$(".up").click(function() {
+					var v = $(this).parent().find(".countValue");
+					v.val((parseInt(v.val()) + 1) + "");
+					countSelected();
+				})
+				$(".countValue").keyup(function() {
+					var re = /^[0-9]*[0-9]$/;
+					var s = $(this).val();
+					if(s === "")
+						$(this).val("1");
+					else if(!re.test(s))
+						$(this).val(s.substr(0, s.length - 1));
+					countSelected();
+				})
+			})
+		</script>
+		<script type="text/javascript">
+			function countSelected() {
+				var cnt = 0;
+				var m = 0;
+				var re = /[0-9\.]/g;
+
+				$(".g-check").each(function() {
+					var trDom = $(this).parent().parent();
+					var unitPriceString = trDom.find(".unit-price").text();
+					var matches = unitPriceString.match(re);
+					if(typeof matches !== "object")
+						return cnt;
+					var unitPrice = parseFloat(matches.join(""));
+					var count = parseInt(trDom.find(".countValue").val());
+					var price = unitPrice * count;
+					trDom.find(".price").text(price.toFixed(2).toString());
+					var color = "#FFFFFF";
+
+					if($(this).find(".unselect").css("display") !== "none") {
+						++cnt;
+
+						color = "#fff8e1";
+						m += price;
+					}
+					trDom.css("background-color", color);
+				})
+
+				$(".totalMoney").text("￥" + m.toFixed(2).toString());
+				$("#count").text(cnt + "");
+
+				return cnt;
+			}
+		</script>
+	</head>
+	<body>
+		<!--导航栏-->
+		<nav class="m-nav">
+		<div class="g-nav-mid">
+			<span style="margin: 0 15px 0 0;">喵，欢迎来天猫</span>
+			<a class="link" href="#login">请登陆</a>
+			<a class="link" href="#register">免费注册</a>
+			<span class="meau">
+				<a class="link" href="#order">我的订单</a>
+				<span class="glyphicon glyphicon-shopping-cart s-redColor"></span>
+				<a class="link" href="#shopping-car">购物车0件</a>
+			</span>
+		</div>
+		</nav>
+		<div style="padding: 20px;"></div>
+		
+		<!--mini搜索界面-->
+		<div class="g-search-mid">
+		<a class="u-search-mlogo" href="#index"><img src="src/logo-min.png" alt="tmall天猫" /></a>
+		<div>
+			<div class="m-search-min">
+				<form action="" name="" method="">
+					<input class="u-search-input-min" type="text" placeholder="风冷无霜 大容量更优惠" />
+					<button class="u-search-button-min">搜索</button>
+				</form>
+				<nav class="u-search-hot">
+					<a class="link" href="#1">牛仔裤</a>
+					<a class="link" href="#2">外套</a>
+					<a class="link" href="#3">四件套</a>
+					<a class="link" href="#4">天猫精灵</a>
+					<a class="link" href="#5">客厅灯</a>
+				</nav>
+			</div>
+		</div>
+	</div>
+		<div style="padding: 20px;"></div>
+		
+		<!--购物车-->
+		<div style="padding: 20px;"></div>
+		<div class="g-mid">
+			<div class="m-settle">
+				<button type="submit" class="m-settle-btn" disabled="disabled">结算</button>
+								<div class="m-settle-text">
+									已选商品 (不含运费)
+									<span class="totalMoney" style="color: #FF0036;">
+										￥0.00
+									</span>
+								</div>
+			</div>
+			<table class="m-shopping-item">
+				<thead>
+					<tr>
+						<th width="110px">
+							<span>
+								<img class="selectAll" src="src/cartNotSelected.png" alt="" />
+								<img class="unselectAll" src="src/cartSelected.png" alt=""/>
+								全选
+							</span>
+						</th>
+						<th width="415px">商品信息</th>
+						<th width="100px">单价</th>
+						<th width="120px">数量</th>
+						<th width="120px">金额</th>
+						<th width="80px">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<span class="g-check">
+								<img class="select" src="src/cartNotSelected.png" alt="" />
+								<img class="unselect" src="src/cartSelected.png" alt=""/>
+							</span>
+							<img class="item-img" src="src/3665.jpg" />
+						</td>
+						<td class="item-name">
+							<a href="#1">美国iRobot扫地机器人吸尘器全自动家用智能扫地机650 天猫电器城</a>
+							<div>
+								<img src="src/creditcard.png" />
+								<img src="src/7day.png" />
+								<img src="src/promise.png" />
+							</div>
+						</td>
+						<td>
+							<div style="color: #8C8C8C; text-decoration: line-through;">￥7580.0</div>
+							<div class="s-redColor unit-price">￥5306.0</div>
+						</td>
+						<td class="change">
+							<button class="down">-</button>
+							<input type="text" class="countValue" value="1" />
+							<button class="up">+</button>
+						</td>
+						<td>
+							<div class="s-redColor price">￥5,306.00</div>
+						</td>
+						<td>
+							<a class="delete" href="#3">删除</a>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span class="g-check">
+								<img class="select" src="src/cartNotSelected.png" alt="" />
+								<img class="unselect" src="src/cartSelected.png" alt=""/>
+							</span>
+							<img class="item-img" src="src/8510.jpg" />
+						</td>
+						<td class="item-name">
+							<a href="#2">阔腿裤三件套装女夏装2016新款大码雪纺时尚休闲气质棉麻九分裤潮</a>
+							<div>
+								<img src="src/creditcard.png" />
+								<img src="src/7day.png" />
+								<img src="src/promise.png" />
+							</div>
+						</td>
+						<td>
+							<div style="color: #8C8C8C; text-decoration: line-through;">￥235.0</div>
+							<div class="s-redColor unit-price">￥152.75</div>
+						</td>
+						<td class="change">
+							<button class="down">-</button>
+							<input type="text" class="countValue" value="1" />
+							<button class="up">+</button>
+						</td>
+						<td>
+							<div class="s-redColor price">￥152.75</div>
+						</td>
+						<td>
+							<a class="delete" href="#3">删除</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="m-settle-big">
+				<span style="position: relative; left: 40px; top: 5px;">
+					<img class="selectAll" src="src/cartNotSelected.png" alt="" />
+					<img class="unselectAll" src="src/cartSelected.png" alt=""/>
+					全选
+				</span>
+				<button type="submit" id="settle" class="m-settle-btn" disabled="disabled">结算</button>
+				<div class="m-settle-text">
+					已选商品
+					<span id="count" style="color: #FF0036; font-size: 16px;">
+						0
+					</span> 件 合计(不含运费)：
+					<span class="totalMoney" style="color: #FF0036; font-size: 18px;">
+						￥0.00
+					</span>
+				</div>
+			</div>
+		</div>	
+		<div style="padding: 20px;"></div>
+		
+		<!--页脚-->
+		<div class="g-foot-mid">
+			<div class="u-foot1-img">
+				<a href="#help"><img src="src/footpage.png" alt="img" /></a>
+			</div>
+			<div class="m-foot1-guide">
+				<div class="div">
+					<h4>购物指南</h4>
+					<ul class="list">
+						<li>免费注册</li>
+						<li>开通支付宝</li>
+						<li>支付宝充值</li>
+					</ul>
+				</div>
+				<div class="div">
+					<h4>天猫保障</h4>
+					<ul class="list">
+						<li>发票保障</li>
+						<li>售后规则</li>
+						<li>缺货赔付</li>
+					</ul>
+				</div>
+				<div class="div">
+					<h4>支付方式</h4>
+					<ul class="list">
+						<li>快捷支付</li>
+						<li>信用卡</li>
+						<li>余额宝</li>
+						<li>蚂蚁花呗</li>
+						<li>货到付款</li>
+					</ul>
+				</div>
+				<div class="div">
+					<h4>商家服务</h4>
+					<ul class="list">
+						<li>天猫规则</li>
+						<li>商家入驻</li>
+						<li>商家中心</li>
+						<li>天猫智库</li>
+						<li>物流服务</li>
+						<li>喵言喵语</li>
+						<li>运营服务</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="m-foot2">
+			<div class="g-foot-mid">
+				<ul class="u-foot2-list">
+					<li>关于天猫</li>
+					<li>帮助中心</li>
+					<li>开放平台</li>
+					<li>诚聘英才</li>
+					<li>联系我们</li>
+					<li>网站合作</li>
+					<li>法律声明及隐私权政策</li>
+					<li>知识产权</li>
+					<li>廉正举报</li>
+					<li>规则意见征集</li>
+				</ul>
+				<br  />
+				<ul class="u-foot2-list">
+					<li>阿里巴巴集团 |</li>
+					<li>淘宝网 |</li>
+					<li>天猫 |</li>
+					<li>聚划算 |</li>
+					<li> 全球速卖通 |</li>
+					<li> 阿里巴巴国际交易市场 |</li>
+					<li>1688 |</li>
+					<li>阿里妈妈 |</li>
+					<li>阿里旅行·去啊 |</li>
+					<li>阿里云计算 |</li>
+					<li>阿里通信 |</li>
+					<li>YunOS	|</li> 
+					<li>阿里旅行·去啊	|</li>
+					<li>高德	|</li>
+					<li>友盟	|</li>
+					<li>虾米	|</li> 
+					<li>天天动听	|</li>
+					<li>来往	|</li>
+					<li>钉钉	|</li>
+					<li>支付宝 </li>
+				</ul>
+				<br />
+				<span class="u-foot2-license">增值电信业务经营许可证： 浙B2-20110446</span>
+				<span class="u-foot2-license">网络文化经营许可证：浙网文[2015]0295-065号</span>
+				<span class="u-foot2-license">12318举报</span><br />
+				<span class="u-foot2-license">互联网药品信息服务资质证书编号：浙-（经营性）-2017-0005</span>
+				<span class="u-foot2-license"><img src="src/polise.png" alt="polise" />浙公网安备 33010002000120号</span>
+				<br />
+				<span class="u-foot2-copyright">© 2003-2017 TMALL.COM 版权所有</span>
+				<br  />
+				<img class="u-foot2-img" src="src/coco.png" alt="co" />
+			</div>
+		</div>
+		
+	</body>
+</html>
