@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>天猫tmall.com--理想生活上天猫</title>
+		<script src="js/jquery-3.2.1.min.js"></script>
+		<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
+		<script src="js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="css/global.css" type="text/css" />
+		<link rel="stylesheet" href="css/index.css" type="text/css" />
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$(".m-recipt-info td input").focus(function(){
+					$(this).parent().find(".tips").show();
+				})
+				$(".m-recipt-info td input").blur(function(){
+					$(this).parent().find(".tips").hide();
+				})
+				$(".m-myorder-bottom textarea").focus(function(){
+					$(this).prop("rows", "5");
+					$(this).parent().css("height", "120px");
+					$(this).parent().find(".tips").show();
+				})
+				$(".m-myorder-bottom textarea").blur(function(){
+					$(this).prop("rows", "1");
+					$(this).parent().css("height", "50px");
+					$(this).parent().find(".tips").hide();
+				})
+				$(".m-myorder-bottom textarea").keyup(function(){
+					var len = $(this).val().length;
+					$("#leftWord").text((200-len) + "");
+				})
+			})
+		</script>
+	</head>
+	<body>
+		<!--导航栏-->
+		<nav class="m-nav">
+		<div class="g-nav-mid">
+			<span style="margin: 0 15px 0 0;">喵，欢迎来天猫</span>
+			<a class="link" href="#login">请登陆</a>
+			<a class="link" href="#register">免费注册</a>
+			<span class="meau">
+				<a class="link" href="#order">我的订单</a>
+				<span class="glyphicon glyphicon-shopping-cart s-redColor"></span>
+				<a class="link" href="#shopping-car">购物车0件</a>
+			</span>
+		</div>
+		</nav>
+		<div style="padding: 20px;"></div>
+		
+		<!--结算界面-->
+		<div class="g-mid">
+			<div style="height: 70px;">
+				<a href="#index" style="float: left;"><img src="src/logo-min.png" alt="tmall天猫" /></a>
+				<img src="src/buyflow.png" style="float: right;"/>
+			</div>
+			<table border="0" class="m-recipt-info">
+				<tr>
+					<td><strong style="font-size: 18px;">输入收货地址</strong></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>详细地址<sup style="color: #FF0036;">*</sup></td>
+					<td>
+						<input type="text" id="addr" style="width: 300px;" placeholder="请输入地址"/>
+						<span class="tips">
+							建议您如实填写详细收货地址，例如街道名称，门牌号码，楼层和房间号等信息
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<td>邮政编码</td>
+					<td>
+						<input type="text" id="postal" placeholder="请输入邮政区号" />
+						<span class="tips">
+							如果您不清楚邮递区号，请填写000000
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<td>收货人姓名<sup style="color: #FF0036;">*</sup></td>
+					<td>
+						<input type="text" id="revName" placeholder="请输入收货人姓名"/>
+						<span class="tips">
+							长度不超过25个字符
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<td>手机号码 <sup style="color: #FF0036;">*</sup></td>
+					<td>
+						<input type="text" id="revTelNum"  placeholder="请输入收货手机号"/>
+						<span class="tips">
+							请输入11位手机号码
+						</span>
+					</td>
+				</tr>
+			</table>
+			<div>
+				<strong style="font-size: 18px;">确认订单信息</strong>
+				<table class="m-myorder-details">
+					<thead>
+						<tr>
+							<th width="640px" colspan="2" style="text-align: left;">
+								<img src="src/orderItemTmall.png" width="20px"/>
+								<a href="#1">店铺：天猫店铺</a>
+								<span class="m-aLiWangWang-active"></span>
+							</th>
+							<th width="85px">单价</th>
+							<th width="40px">数量</th>
+							<th width="85px">小计</th>
+							<th width="250px">配送方式</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<img src="src/8616.jpg" width="80px"/>
+							</td>
+							<td>
+								<a href="#1">美国iRobot扫地机器人吸尘器全自动家用智能扫地机650 天猫电器城</a>
+								<div>
+									<img src="src/creditcard.png" />
+									<img src="src/7day.png" />
+									<img src="src/promise.png" />
+								</div>
+							</td>
+							<td>
+								￥1,235.00
+							</td>
+							<td>
+								4
+							</td>
+							<td>
+								<span class="s-redColor">￥4,940.00</span>
+							</td>
+							<td rowspan="3">
+								<input type="radio" checked=""/>
+								普通配送
+								<select name="" style="padding: 2px;">
+									<option value="快递 免邮费">快递 免邮费</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<img src="src/8616.jpg" width="80px"/>
+							</td>
+							<td>
+								<a href="#1">美国iRobot扫地机器人吸尘器全自动家用智能扫地机650 天猫电器城</a>
+								<div>
+									<img src="src/creditcard.png" />
+									<img src="src/7day.png" />
+									<img src="src/promise.png" />
+								</div>
+							</td>
+							<td>
+								￥1,235.00
+							</td>
+							<td>
+								4
+							</td>
+							<td>
+								<span class="s-redColor">￥4,940.00</span>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<img src="src/8616.jpg" width="80px"/>
+							</td>
+							<td>
+								<a href="#1">美国iRobot扫地机器人吸尘器全自动家用智能扫地机650 天猫电器城</a>
+								<div>
+									<img src="src/creditcard.png" />
+									<img src="src/7day.png" />
+									<img src="src/promise.png" />
+								</div>
+							</td>
+							<td>
+								￥1,235.00
+							</td>
+							<td>
+								4
+							</td>
+							<td>
+								<span class="s-redColor">￥4,940.00</span>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="m-myorder-bottom">
+					<div style="float: left;">给卖家留言:</div>
+					<span class="tips">还可以输入<span class="s-redColor" id="leftWord">200</span>字</span>
+					<textarea name="" rows="1" cols="50" style="font-size: 14px;color: #000000;margin-left: 20px;"></textarea>
+					<div style="float: right;">店铺合计(含运费): ￥12,704.05</div>
+				</div>
+				<div class="m-myorder-submit">
+					<div style="height: 70px;">
+						<div class="amount">
+											实付款： <strong class="s-redColor" style="font-size: 20px;">￥12,704.05</strong>
+										</div>
+					</div>
+					<button class="btn btn-default submit-btn">
+						提交订单
+					</button>
+				</div>
+			</div>
+		</div>
+		<div style="padding: 20px;"></div>
+		
+		<!--页脚-->
+		<div style="padding: 20px;"></div>
+		<div class="g-foot-mid">
+			<div class="u-foot1-img">
+				<a href="#help"><img src="src/footpage.png" alt="img" /></a>
+			</div>
+			<div class="m-foot1-guide">
+				<div class="div">
+					<h4>购物指南</h4>
+					<ul class="list">
+						<li>免费注册</li>
+						<li>开通支付宝</li>
+						<li>支付宝充值</li>
+					</ul>
+				</div>
+				<div class="div">
+					<h4>天猫保障</h4>
+					<ul class="list">
+						<li>发票保障</li>
+						<li>售后规则</li>
+						<li>缺货赔付</li>
+					</ul>
+				</div>
+				<div class="div">
+					<h4>支付方式</h4>
+					<ul class="list">
+						<li>快捷支付</li>
+						<li>信用卡</li>
+						<li>余额宝</li>
+						<li>蚂蚁花呗</li>
+						<li>货到付款</li>
+					</ul>
+				</div>
+				<div class="div">
+					<h4>商家服务</h4>
+					<ul class="list">
+						<li>天猫规则</li>
+						<li>商家入驻</li>
+						<li>商家中心</li>
+						<li>天猫智库</li>
+						<li>物流服务</li>
+						<li>喵言喵语</li>
+						<li>运营服务</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="m-foot2">
+			<div class="g-foot-mid">
+				<ul class="u-foot2-list">
+					<li>关于天猫</li>
+					<li>帮助中心</li>
+					<li>开放平台</li>
+					<li>诚聘英才</li>
+					<li>联系我们</li>
+					<li>网站合作</li>
+					<li>法律声明及隐私权政策</li>
+					<li>知识产权</li>
+					<li>廉正举报</li>
+					<li>规则意见征集</li>
+				</ul>
+				<br  />
+				<ul class="u-foot2-list">
+					<li>阿里巴巴集团 |</li>
+					<li>淘宝网 |</li>
+					<li>天猫 |</li>
+					<li>聚划算 |</li>
+					<li> 全球速卖通 |</li>
+					<li> 阿里巴巴国际交易市场 |</li>
+					<li>1688 |</li>
+					<li>阿里妈妈 |</li>
+					<li>阿里旅行·去啊 |</li>
+					<li>阿里云计算 |</li>
+					<li>阿里通信 |</li>
+					<li>YunOS	|</li> 
+					<li>阿里旅行·去啊	|</li>
+					<li>高德	|</li>
+					<li>友盟	|</li>
+					<li>虾米	|</li> 
+					<li>天天动听	|</li>
+					<li>来往	|</li>
+					<li>钉钉	|</li>
+					<li>支付宝 </li>
+				</ul>
+				<br />
+				<span class="u-foot2-license">增值电信业务经营许可证： 浙B2-20110446</span>
+				<span class="u-foot2-license">网络文化经营许可证：浙网文[2015]0295-065号</span>
+				<span class="u-foot2-license">12318举报</span><br />
+				<span class="u-foot2-license">互联网药品信息服务资质证书编号：浙-（经营性）-2017-0005</span>
+				<span class="u-foot2-license"><img src="src/polise.png" alt="polise" />浙公网安备 33010002000120号</span>
+				<br />
+				<span class="u-foot2-copyright">© 2003-2017 TMALL.COM 版权所有</span>
+				<br  />
+				<img class="u-foot2-img" src="src/coco.png" alt="co" />
+			</div>
+		</div>
+	
+	</body>
+</html>
